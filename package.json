@@ -1,0 +1,28 @@
+{
+  "name": "twitter-bot",
+  "version": "1.0.0",
+  "description": "I am a twitter-bot",
+  "main": "sketch.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazwhale/twitter-bot.git"
+  },
+  "keywords": [
+    "twitter",
+    "api",
+    "bot"
+  ],
+  "author": "Naz Malik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazwhale/twitter-bot/issues"
+  },
+  "homepage": "https://github.com/nazwhale/twitter-bot#readme",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
