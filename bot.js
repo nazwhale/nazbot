@@ -11,17 +11,25 @@ var T = new Twit({
 });
 
 
-var tweet = {
-  status: 'Test: making a bot with the Twitter API'
-}
+tweetIt();
+setInterval(tweetIt, 1000*20)
 
-T.post('statuses/update', tweet, tweeted);
+function tweetIt() {
 
-function tweeted(err, data, response) {
-  if (err) {
-    console.log("Something with wrong!");
-  } else {
-    console.log("It worked!");
+  var r = Math.floor(Math.random()*100);
+
+  var tweet = {
+    status: 'Here is a random number: ' + r + ' #nazbot'
+  }
+
+  T.post('statuses/update', tweet, tweeted);
+
+  function tweeted(err, data, response) {
+    if (err) {
+      console.log("Something with wrong!");
+    } else {
+      console.log("It worked!");
+    }
   }
 }
 
