@@ -1,4 +1,4 @@
-console.log('The bot is starting');
+console.log('The replier bot is starting');
 
 var Twit = require('twit');
 
@@ -15,13 +15,24 @@ var T = new Twit({
 var stream = T.stream('user');
 
 // Anytime someone follows me. (see twitter API.streaming docs)
-stream.on('follow', followed);
+stream.on('tweet', tweetEvent);
 
-function followed(eventMsg) {
-  console.log("Follow event!");
-  var name = eventMsg.source.name;
-  var screenName = eventMsg.source.screen_name;
-  tweetIt('Hello ' + '@' + screenName + ' beeboop. From #nazbot');
+function tweetEvent(eventMsg) {
+  // var fs = require('fs');
+  // var json = JSON.stringify(eventMsg, null, 2);
+  // fs.writeFile("tweet.json", json);
+
+  var replyto = eventMsg.in_reply_to_screen_name;
+  var text = eventMsg.text;
+  var from = eventMsg.user.screen_name;
+
+  console.log(replyto + ' ' + from);
+
+  if (replyto === 'thenazbot') {
+    // make use of what's in text variable. poem using wordnick api etc.
+    var newtweet = '@' + from + ' thanks for the tweet boopboop #nazbot';
+    tweetIt(newtweet);
+  }
 }
 
 
@@ -40,9 +51,10 @@ function tweetIt(txt) {
 
   function tweeted(err, data, response) {
     if (err) {
-      console.log("Something with wrong!");
+      console.log(err);
+      console.log("Something went wrong!");
     } else {
-      console.log("New follower!");
+      console.log("It worked!");
     }
   }
 }
