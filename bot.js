@@ -11,15 +11,29 @@ var T = new Twit({
 });
 
 
-tweetIt();
-setInterval(tweetIt, 1000*20)
+// Set up a user stream
+var stream = T.stream('user');
 
-function tweetIt() {
+// Anytime someone follows me. (see twitter API.streaming docs)
+stream.on('follow', followed);
+
+function followed(eventMsg) {
+  console.log("Follow event!");
+  var name = eventMsg.source.name;
+  var screenName = eventMsg.source.screen_name;
+  tweetIt('Hello ' + '@' + screenName + ' beeboop. From #nazbot');
+}
+
+
+// tweetIt();
+// setInterval(tweetIt, 1000*20)
+
+function tweetIt(txt) {
 
   var r = Math.floor(Math.random()*100);
 
   var tweet = {
-    status: 'Here is a random number: ' + r + ' #nazbot'
+    status: txt
   }
 
   T.post('statuses/update', tweet, tweeted);
@@ -28,7 +42,7 @@ function tweetIt() {
     if (err) {
       console.log("Something with wrong!");
     } else {
-      console.log("It worked!");
+      console.log("New follower!");
     }
   }
 }
