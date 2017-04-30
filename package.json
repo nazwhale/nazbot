@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/nazwhale/twitter-bot#readme",
   "dependencies": {
+    "request-promise": "^4.2.0",
     "twit": "^2.2.5"
   }
 }

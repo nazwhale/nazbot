@@ -10,6 +10,31 @@ var T = new Twit({
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
 });
 
+// console.log('The api is starting')
+
+// const request = require('request-promise');
+// getNews("cheerios");
+
+// function getNews(choice) {
+//   var url = 'https://content.guardianapis.com/search?';
+//   var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
+//   var search = 'q=' + choice + '&';
+//   var complete = url + search + key;
+//   apiRequest(complete);
+// }
+
+// function apiRequest(complete){
+//   const options = {
+//     method: 'GET',
+//     uri: complete,
+//     json: true
+//   }
+//   request(options)
+//     .then(function (response){
+//       data = response
+//       console.log(data.response.results[0].webTitle);
+//     })
+// }
 
 // Set up a user stream
 var stream = T.stream('user');
@@ -26,7 +51,7 @@ function tweetEvent(eventMsg) {
   var text = eventMsg.text;
   var from = eventMsg.user.screen_name;
 
-  console.log(replyto + ' ' + from);
+  console.log(from + ' ' + replyto);
 
   if (replyto === 'thenazbot') {
     // make use of what's in text variable. poem using wordnick api etc.
