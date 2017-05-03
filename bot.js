@@ -34,10 +34,14 @@ function apiRequest(completeURL){
 
   var data = xmlhttp.responseText;
 
-  console.log(data);
+  var fs = require('fs');
+  var json = JSON.stringify(data, null, 2);
+  fs.writeFile("guardianRequest.json", json);
+
   // console.log(data.response.results[0].webTitle);
+  console.log(data);
   console.log("!!!");
-  console.log(data[0]);
+  console.log(data.slice(1,-1).response);
 }
 
 // Set up a user stream
@@ -47,10 +51,6 @@ var stream = T.stream('user');
 stream.on('tweet', tweetEvent);
 
 function tweetEvent(eventMsg) {
-  // var fs = require('fs');
-  // var json = JSON.stringify(eventMsg, null, 2);
-  // fs.writeFile("tweet.json", json);
-
   var replyto = eventMsg.in_reply_to_screen_name;
   var text = eventMsg.text;
   var from = eventMsg.user.screen_name;
