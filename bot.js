@@ -1,3 +1,6 @@
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
+
 console.log('The replier bot is starting');
 
 var Twit = require('twit');
@@ -10,31 +13,32 @@ var T = new Twit({
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
 });
 
-// console.log('The api is starting')
+console.log('The api is starting')
 
-// const request = require('request-promise');
-// getNews("cheerios");
+// save it to a JSON and play in the node REPL to try and get API data
 
-// function getNews(choice) {
-//   var url = 'https://content.guardianapis.com/search?';
-//   var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
-//   var search = 'q=' + choice + '&';
-//   var complete = url + search + key;
-//   apiRequest(complete);
-// }
+getNews("cheerios");
 
-// function apiRequest(complete){
-//   const options = {
-//     method: 'GET',
-//     uri: complete,
-//     json: true
-//   }
-//   request(options)
-//     .then(function (response){
-//       data = response
-//       console.log(data.response.results[0].webTitle);
-//     })
-// }
+function getNews(choice) {
+  var url = 'https://content.guardianapis.com/search?';
+  var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
+  var search = 'q=' + choice + '&';
+  var completeURL = url + search + key;
+  apiRequest(completeURL);
+}
+
+function apiRequest(completeURL){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open('GET', completeURL, false);
+  xmlhttp.send();
+
+  var data = xmlhttp.responseText;
+
+  console.log(data);
+  // console.log(data.response.results[0].webTitle);
+  console.log("!!!");
+  console.log(data[0]);
+}
 
 // Set up a user stream
 var stream = T.stream('user');
@@ -83,6 +87,10 @@ function tweetIt(txt) {
     }
   }
 }
+
+
+
+// get all tweets for a search term
 
 // var params = {
 //   q: 'bread since:2017-04-21',
