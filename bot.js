@@ -52,6 +52,7 @@ function tweetEvent(eventMsg) {
 
   if (replyto === 'thenazbot') {
     //callback in here?
+    // research promises
     // make use of what's in text variable. poem using wordnick api etc.
     getNews(text);
     if (article) {
