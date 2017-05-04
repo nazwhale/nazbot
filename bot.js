@@ -17,7 +17,6 @@ console.log('The api is starting')
 
 // save it to a JSON and play in the node REPL to try and get API data
 
-getNews("cheerios");
 
 function getNews(choice) {
   var url = 'https://content.guardianapis.com/search?';
@@ -28,20 +27,12 @@ function getNews(choice) {
 }
 
 function apiRequest(completeURL){
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open('GET', completeURL, false);
-  xmlhttp.send();
-
-  var data = xmlhttp.responseText;
-
-  var fs = require('fs');
-  var json = JSON.stringify(data, null, 2);
-  fs.writeFile("guardianRequest.json", json);
-
-  // console.log(data.response.results[0].webTitle);
-  console.log(data);
-  console.log("!!!");
-  console.log(data.slice(1,-1).response);
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', completeURL, false);
+  xhr.send();
+  var apiData = JSON.parse(xhr.responseText);
+  console.log(apiData.response.results[0].webTitle);
+  article = apiData.response.results[0].webTitle
 }
 
 // Set up a user stream
@@ -55,12 +46,18 @@ function tweetEvent(eventMsg) {
   var text = eventMsg.text;
   var from = eventMsg.user.screen_name;
 
-  console.log(from + ' ' + replyto);
+  // callback? get this to run first
+  // console.log(from + ' ' + replyto);
+  // console.log(article);
 
   if (replyto === 'thenazbot') {
+    //callback in here?
     // make use of what's in text variable. poem using wordnick api etc.
-    var newtweet = '@' + from + ' thanks for the tweet boopboop #nazbot';
-    tweetIt(newtweet);
+    getNews(text);
+    if (article) {
+      var newtweet = '@' + from + ' ' + article + ' #nazbot';
+      tweetIt(newtweet);
+    }
   }
 }
 
