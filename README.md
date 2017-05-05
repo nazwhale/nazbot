@@ -16,4 +16,4 @@ My first idea was to get my bot to send the tweeter a news article based on the 
 
 I used the Guardian API to search for an article and return the first result. I then interpolated this result in the contents of the tweet reply.
 
-![Screenshot](http://i.imgur.com/X7avU7x.png)
+![Screenshot](http://i.imgur.com/xkkd2hQ.png)
