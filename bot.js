@@ -17,7 +17,7 @@ console.log('The api is starting')
 
 // save it to a JSON and play in the node REPL to try and get API data
 
-
+getNews("Tea")
 function getNews(choice) {
   var url = 'https://content.guardianapis.com/search?';
   var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
@@ -32,7 +32,8 @@ function apiRequest(completeURL){
   xhr.send();
   var apiData = JSON.parse(xhr.responseText);
   console.log(apiData.response.results[0].webTitle);
-  article = apiData.response.results[0].webTitle
+  console.log(apiData.response.results[0].webUrl);
+  article = apiData.response.results[0].webUrl
 }
 
 // Set up a user stream
