@@ -17,12 +17,29 @@ console.log('The api is starting')
 
 // save it to a JSON and play in the node REPL to try and get API data
 
-getNews("Tea")
-function getNews(choice) {
-  var url = 'https://content.guardianapis.com/search?';
-  var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
-  var search = 'q=' + choice + '&';
-  var completeURL = url + search + key;
+// getNews("Tea")
+// function getNews(choice) {
+//   var url = 'https://content.guardianapis.com/search?';
+//   var key = 'api-key=79da25fe-82d8-4d99-b194-38059f5cf206';
+//   var search = 'q=' + choice + '&';
+//   var completeURL = url + search + key;
+//   apiRequest(completeURL);
+// }
+
+// function apiRequest(completeURL){
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', completeURL, false);
+//   xhr.send();
+//   var apiData = JSON.parse(xhr.responseText);
+//   console.log(apiData.response.results[0].webTitle);
+//   console.log(apiData.response.results[0].webUrl);
+//   article = apiData.response.results[0].webUrl
+// }
+
+getPoem("tree")
+function getPoem(choice) {
+  var url = 'http://poetrydb.org/author,lines/Shakespeare;';
+  var completeURL = url + choice
   apiRequest(completeURL);
 }
 
@@ -31,9 +48,8 @@ function apiRequest(completeURL){
   xhr.open('GET', completeURL, false);
   xhr.send();
   var apiData = JSON.parse(xhr.responseText);
-  console.log(apiData.response.results[0].webTitle);
-  console.log(apiData.response.results[0].webUrl);
-  article = apiData.response.results[0].webUrl
+  console.log(apiData[0].title);
+  // article = apiData.response.results[0].webUrl
 }
 
 // Set up a user stream

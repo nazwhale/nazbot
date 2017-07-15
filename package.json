@@ -1,7 +1,10 @@
 {
-  "name": "twitter-bot",
-  "version": "1.0.0",
+  "name": "nazbot",
+  "version": "1.0.1",
   "description": "I am a twitter-bot",
+  "engines": {
+    "node": "6.11.1"
+  }
   "main": "sketch.js",
   "scripts": {
     "start": "node bot.js",
